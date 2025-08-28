@@ -7,7 +7,6 @@ from ScoutSuite import ERRORS_LIST
 
 from concurrent.futures import ThreadPoolExecutor
 
-from ScoutSuite.core.cli_parser import ScoutSuiteArgumentParser
 from ScoutSuite.core.console import set_logger_configuration, print_info, print_exception
 from ScoutSuite.core.exceptions import RuleExceptions
 from ScoutSuite.core.processingengine import ProcessingEngine
@@ -22,74 +21,6 @@ import collections
 collections.Callable = collections.abc.Callable
 
 
-def run_from_cli():
-    parser = ScoutSuiteArgumentParser()
-    args = parser.parse_args()
-
-    # Get the dictionary to get None instead of a crash
-    args = args.__dict__
-
-    # TODO provider-specific arguments should be prepended with the provider's code
-    #  (e.g. aws_profile, azure_user_account)
-
-    try:
-        return run(provider=args.get('provider'),
-                   # AWS
-                   profile=args.get('profile'),
-                   aws_access_key_id=args.get('aws_access_key_id'),
-                   aws_secret_access_key=args.get('aws_secret_access_key'),
-                   aws_session_token=args.get('aws_session_token'),
-                   # Azure
-                   cli=args.get('cli'),
-                   user_account=args.get('user_account'),
-                   user_account_browser=args.get('user_account_browser'),
-                   service_account=args.get('service_account'),
-                   msi=args.get('msi'),
-                   service_principal=args.get('service_principal'), file_auth=args.get('file_auth'),
-                   client_id=args.get('client_id'), client_secret=args.get('client_secret'),
-                   username=args.get('username'), password=args.get('password'),
-                   tenant_id=args.get('tenant_id'),
-                   subscription_ids=args.get('subscription_ids'), all_subscriptions=args.get('all_subscriptions'),
-                   # GCP
-                   project_id=args.get('project_id'), folder_id=args.get('folder_id'),
-                   organization_id=args.get('organization_id'), all_projects=args.get('all_projects'),
-                   # Aliyun
-                   access_key_id=args.get('access_key_id'), access_key_secret=args.get('access_key_secret'),
-                   # Kubernetes
-                   kubernetes_cluster_provider=args.get('kubernetes_cluster_provider'),
-                   kubernetes_config_file=args.get('kubernetes_config_file'),
-                   kubernetes_context=args.get('kubernetes_context'),
-                   kubernetes_persist_config=args.get('kubernetes_persist_config'),
-                   kubernetes_azure_subscription_id=args.get('kubernetes_azure_subscription_id'),
-                   #DigitalOcean
-                   token=args.get('token'),
-                   access_key=args.get('access_key'),
-                   access_secret=args.get('access_secret'),
-                   # General
-                   report_name=args.get('report_name'), report_dir=args.get('report_dir'),
-                   timestamp=args.get('timestamp'),
-                   services=args.get('services'), skipped_services=args.get('skipped_services'),
-                   list_services=args.get('list_services'),
-                   result_format=args.get('result_format'),
-                   database_name=args.get('database_name'),
-                   host_ip=args.get('host_ip'),
-                   host_port=args.get('host_port'),
-                   max_workers=args.get('max_workers'),
-                   regions=args.get('regions'),
-                   excluded_regions=args.get('excluded_regions'),
-                   fetch_local=args.get('fetch_local'), update=args.get('update'),
-                   max_rate=args.get('max_rate'),
-                   ip_ranges=args.get('ip_ranges'), ip_ranges_name_key=args.get('ip_ranges_name_key'),
-                   ruleset=args.get('ruleset'), exceptions=args.get('exceptions'),
-                   force_write=args.get('force_write'),
-                   debug=args.get('debug'),
-                   quiet=args.get('quiet'),
-                   log_file=args.get('log_file'),
-                   no_browser=args.get('no_browser'),
-                   programmatic_execution=False)
-    except (KeyboardInterrupt, SystemExit):
-        print_info('Exiting')
-        return 130
 
 
 def run(provider,

@@ -63,3 +63,65 @@ There are also a number of handy [tools](https://github.com/nccgroup/ScoutSuite/
   ```bash
   bash scripts/jules_preamble.sh
   ```
+
+---
+
+## Django Application Quick Start
+
+This project now includes a Django-based web application for running ScoutSuite scans.
+
+### Setup
+
+1.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    pip install -r dev-requirements.txt
+    ```
+
+2.  **Run database migrations:**
+    ```bash
+    python scout_web/manage.py migrate
+    ```
+
+### Running the Application
+
+1.  **Start the Django development server:**
+    ```bash
+    python scout_web/manage.py runserver
+    ```
+
+2.  **Start the Celery worker:**
+    In a separate terminal, run:
+    ```bash
+    celery -A scout_web worker -l info
+    ```
+    You will also need a Redis server running on `localhost:6379`.
+
+### Usage
+
+You can interact with the application through the REST API.
+
+1.  **Create a Cloud Provider:**
+    ```bash
+    curl -X POST http://localhost:8000/api/cloudproviders/ -H "Content-Type: application/json" -d '{"name": "Amazon Web Services", "code": "aws"}'
+    ```
+
+2.  **Create an Account:**
+    ```bash
+    curl -X POST http://localhost:8000/api/accounts/ -H "Content-Type: application/json" -d '{"name": "My AWS Account", "provider": 1, "credentials": {"aws_access_key_id": "YOUR_KEY", "aws_secret_access_key": "YOUR_SECRET"}}'
+    ```
+
+3.  **Trigger a Scan:**
+    ```bash
+    curl -X POST http://localhost:8000/api/accounts/1/scan/
+    ```
+
+4.  **Check Scan Status:**
+    ```bash
+    curl http://localhost:8000/api/scans/1/
+    ```
+
+5.  **View Findings:**
+    ```bash
+    curl http://localhost:8000/api/findings/
+    ```
