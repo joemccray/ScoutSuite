@@ -1,0 +1,32 @@
+id: "wf-network-security-review"
+name: "Network Security Review"
+icp: "network_engineer"
+goal: "To review network security configurations for vulnerabilities."
+kpis:
+  time_on_task_minutes:
+    target_reduction_pct: 50
+steps:
+  - id: "step-1"
+    agent: "network_security"
+    qa_agent: "qa_network_security"
+    input:
+      task: "Review all security groups for unrestricted ingress rules."
+    acceptance:
+      - "The review is accurate and complete."
+      - "The recommendations for remediation are clear."
+  - id: "step-2"
+    agent: "network_security"
+    qa_agent: "qa_network_security"
+    input:
+      task: "Review all network ACLs for overly permissive rules."
+    acceptance:
+      - "The review is accurate and complete."
+      - "The recommendations for remediation are clear."
+  - id: "step-3"
+    agent: "network_security"
+    qa_agent: "qa_network_security"
+    input:
+      task: "Review all route tables for routes to the internet."
+    acceptance:
+      - "The review is accurate and complete."
+      - "The recommendations for remediation are clear."

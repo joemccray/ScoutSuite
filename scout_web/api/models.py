@@ -36,6 +36,7 @@ class Scan(models.Model):
 
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+    configuration = models.JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
 
@@ -55,3 +56,32 @@ class Finding(models.Model):
 
     def __str__(self):
         return self.rule_name
+
+class RuleSet(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    description = models.TextField(blank=True)
+    is_default = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+class Rule(models.Model):
+    ruleset = models.ForeignKey(RuleSet, on_delete=models.CASCADE, related_name='rules')
+    name = models.CharField(max_length=255)
+    enabled = models.BooleanField(default=True)
+    # Other rule properties can be added here
+
+    def __str__(self):
+        return self.name
+
+class RuleException(models.Model):
+    # An exception to a rule for a specific resource
+    rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
+    resource_id = models.CharField(max_length=255)
+    reason = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Exception for {self.rule.name} on {self.resource_id}"

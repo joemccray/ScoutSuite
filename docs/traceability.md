@@ -8,6 +8,9 @@ This matrix shows the traceability from the database tables to the API endpoints
 | `api_account` | `Account` | `AccountSerializer` | `AccountViewSet` | `/api/accounts/` |
 | `api_scan` | `Scan` | `ScanSerializer` | `ScanViewSet` | `/api/scans/` |
 | `api_finding` | `Finding` | `FindingSerializer` | `FindingViewSet` | `/api/findings/` |
+| `api_ruleset` | `RuleSet` | `RuleSetSerializer` | `RuleSetViewSet` | `/api/rulesets/` |
+| `api_rule` | `Rule` | `RuleSerializer` | `RuleViewSet` | `/api/rules/` |
+| `api_ruleexception` | `RuleException` | `RuleExceptionSerializer` | `RuleExceptionViewSet` | `/api/exceptions/` |
 
 ## Custom API Actions
 

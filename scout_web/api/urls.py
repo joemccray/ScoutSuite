@@ -8,6 +8,9 @@ router.register(r'cloudproviders', views.CloudProviderViewSet, basename='cloudpr
 router.register(r'accounts', views.AccountViewSet, basename='account')
 router.register(r'scans', views.ScanViewSet, basename='scan')
 router.register(r'findings', views.FindingViewSet, basename='finding')
+router.register(r'rulesets', views.RuleSetViewSet, basename='ruleset')
+router.register(r'rules', views.RuleViewSet, basename='rule')
+router.register(r'exceptions', views.RuleExceptionViewSet, basename='exception')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

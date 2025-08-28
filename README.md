@@ -66,36 +66,55 @@ There are also a number of handy [tools](https://github.com/nccgroup/ScoutSuite/
 
 ---
 
-## Django Application Quick Start
+## Development Setup
 
-This project now includes a Django-based web application for running ScoutSuite scans.
-
-### Setup
+This project uses a `Makefile` to simplify common development tasks.
 
 1.  **Install dependencies:**
     ```bash
-    pip install -r requirements.txt
-    pip install -r dev-requirements.txt
+    make install
     ```
 
 2.  **Run database migrations:**
     ```bash
-    python scout_web/manage.py migrate
+    python manage.py migrate
     ```
 
 ### Running the Application
 
 1.  **Start the Django development server:**
     ```bash
-    python scout_web/manage.py runserver
+    make run-server
     ```
 
 2.  **Start the Celery worker:**
     In a separate terminal, run:
     ```bash
-    celery -A scout_web worker -l info
+    make run-worker
     ```
-    You will also need a Redis server running on `localhost:6379`.
+    You will also need a Redis server running on `localhost:6379`. See the Docker Compose section for an easy way to run Redis.
+
+### Running Tests and Checks
+
+-   Run the test suite: `make test`
+-   Run the linter: `make lint`
+-   Run the security scanner: `make security-check`
+-   Run all checks: `make all-checks`
+
+---
+
+## Running with Docker
+
+The easiest way to get the full application stack running is with Docker Compose.
+
+1.  **Create a `.env` file:**
+    Copy the `.env.example` file to `.env` and fill in the required environment variables, especially `SECRET_KEY`.
+
+2.  **Build and start the services:**
+    ```bash
+    docker-compose up --build
+    ```
+    This will start the web server, the celery worker, and a redis instance.
 
 ### Usage
 
@@ -124,4 +143,18 @@ You can interact with the application through the REST API.
 5.  **View Findings:**
     ```bash
     curl http://localhost:8000/api/findings/
+    ```
+
+6.  **Manage RuleSets:**
+    ```bash
+    # Create a new ruleset
+    curl -X POST http://localhost:8000/api/rulesets/ -H "Content-Type: application/json" -d '{"name": "My Custom Ruleset"}'
+
+    # List rulesets
+    curl http://localhost:8000/api/rulesets/
+    ```
+
+7.  **Trigger a Scan with a Custom Configuration:**
+    ```bash
+    curl -X POST http://localhost:8000/api/accounts/1/scan/ -H "Content-Type: application/json" -d '{"configuration": {"ruleset": "My Custom Ruleset"}}'
     ```

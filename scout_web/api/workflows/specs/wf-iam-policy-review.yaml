@@ -1,0 +1,32 @@
+id: "wf-iam-policy-review"
+name: "IAM Policy Review"
+icp: "devops_engineer"
+goal: "To review IAM policies for excessive permissions."
+kpis:
+  time_on_task_minutes:
+    target_reduction_pct: 50
+steps:
+  - id: "step-1"
+    agent: "access_control"
+    qa_agent: "qa_access_control"
+    input:
+      task: "Review all IAM policies attached to users."
+    acceptance:
+      - "The review is accurate and complete."
+      - "The recommendations for remediation are clear."
+  - id: "step-2"
+    agent: "access_control"
+    qa_agent: "qa_access_control"
+    input:
+      task: "Review all IAM policies attached to roles."
+    acceptance:
+      - "The review is accurate and complete."
+      - "The recommendations for remediation are clear."
+  - id: "step-3"
+    agent: "access_control"
+    qa_agent: "qa_access_control"
+    input:
+      task: "Review all IAM policies attached to groups."
+    acceptance:
+      - "The review is accurate and complete."
+      - "The recommendations for remediation are clear."

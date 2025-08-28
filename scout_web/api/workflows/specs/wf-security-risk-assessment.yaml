@@ -1,0 +1,32 @@
+id: "wf-security-risk-assessment"
+name: "Security Risk Assessment"
+icp: "security_auditor"
+goal: "To assess the security risks of the cloud environment."
+kpis:
+  time_on_task_minutes:
+    target_reduction_pct: 50
+steps:
+  - id: "step-1"
+    agent: "security_risk_assessment"
+    qa_agent: "qa_security_risk_assessment"
+    input:
+      task: "Assess the risks associated with publicly accessible S3 buckets."
+    acceptance:
+      - "The risk assessment is accurate and comprehensive."
+      - "The recommendations are actionable."
+  - id: "step-2"
+    agent: "security_risk_assessment"
+    qa_agent: "qa_security_risk_assessment"
+    input:
+      task: "Assess the risks associated with unrestricted security groups."
+    acceptance:
+      - "The risk assessment is accurate and comprehensive."
+      - "The recommendations are actionable."
+  - id: "step-3"
+    agent: "security_risk_assessment"
+    qa_agent: "qa_security_risk_assessment"
+    input:
+      task: "Assess the risks associated with unencrypted RDS instances."
+    acceptance:
+      - "The risk assessment is accurate and comprehensive."
+      - "The recommendations are actionable."

@@ -1,0 +1,32 @@
+id: "wf-cloud-asset-inventory"
+name: "Cloud Asset Inventory"
+icp: "security_engineer"
+goal: "To create a comprehensive inventory of all cloud assets."
+kpis:
+  time_on_task_minutes:
+    target_reduction_pct: 50
+steps:
+  - id: "step-1"
+    agent: "cloud_asset_discovery"
+    qa_agent: "qa_cloud_asset_discovery"
+    input:
+      task: "Discover all EC2 instances in the us-east-1 region."
+    acceptance:
+      - "The inventory is complete and accurate."
+      - "The inventory includes all relevant metadata for each asset."
+  - id: "step-2"
+    agent: "cloud_asset_discovery"
+    qa_agent: "qa_cloud_asset_discovery"
+    input:
+      task: "Discover all S3 buckets."
+    acceptance:
+      - "The inventory is complete and accurate."
+      - "The inventory includes the public access status of each bucket."
+  - id: "step-3"
+    agent: "cloud_asset_discovery"
+    qa_agent: "qa_cloud_asset_discovery"
+    input:
+      task: "Discover all RDS instances."
+    acceptance:
+      - "The inventory is complete and accurate."
+      - "The inventory includes the encryption status of each instance."
