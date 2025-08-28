@@ -407,20 +407,5 @@ async def _run(provider,
         print_exception('Failure while running post-processing engine: {}'.format(e))
         return 108
 
-    # Save config and create HTML report
-    try:
-        html_report_path = report.save(cloud_provider, exceptions, force_write, debug)
-    except Exception as e:
-        print_exception('Failure while generating HTML report: {}'.format(e))
-        return 109
-
-    # Open the report by default
-    if not no_browser:
-        print_info('Opening the HTML report')
-        url = 'file://%s' % os.path.abspath(html_report_path)
-        webbrowser.open(url, new=2)
-
-    if ERRORS_LIST:  # errors were handled during execution
-        return 200
-    else:
-        return 0
+    # Return the cloud_provider object which contains all the findings.
+    return cloud_provider
