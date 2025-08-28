@@ -74,3 +74,9 @@ report-*
 *.prof
 
 !docker/bin
+
+# Django
+*.log
+media/
+static/
+server.log

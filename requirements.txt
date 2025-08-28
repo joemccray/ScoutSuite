@@ -69,3 +69,8 @@ kubernetes
 
 # DigitalOcean Cloud Provider
 pydo >=0.2.0
+
+# Django
+django
+djangorestframework
+django-cors-headers

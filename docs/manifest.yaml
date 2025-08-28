@@ -1,0 +1,32 @@
+{
+  "required": [
+    {
+      "path": "docs/Agentic-Django-Plan.md",
+      "sha256": "513a80cdb41d365b637fd788d9fec02b3fe2abe211b516b7ff322d19d21cf3c8"
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "sha256": "82c2b72e168ba75ba7023365a23b401b68b2aa7b0916d491eb54851d6b53a99b"
+    },
+    {
+      "path": "scripts/jules_preamble.sh",
+      "sha256": "73e4e754aa0feaaf19e6650ad76af66874e44d4ce7521917e9c08d6a2f47faa7"
+    },
+    {
+      "path": "scripts/restore_docs.py",
+      "sha256": "c7c2467c7a2ded997d11ef7ade01e22ac7225c83c2ffa7b34b11fb12b607ff70"
+    },
+    {
+      "path": "scripts/verify_manifest.py",
+      "sha256": "fea096ed4b2156162e55f6ca63220b98dfcd596f1a5a12a8982a008e79f578a0"
+    },
+    {
+      "path": ".github/workflows/verify-docs.yml",
+      "sha256": "d5332144321e4e72014f1c52fe6125cacb85c55f92c6c21a5ff216f28dc2fcfe"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c68831fde86d0596b54198eea0b5448a927b03dff9feebc9af46f1957de38474"
+    }
+  ]
+}
