@@ -4,13 +4,13 @@ install:
 	pip install -r requirements.txt
 
 test:
-	python manage.py test
+	python src/manage.py test scout_web
 
 run-server:
-	python manage.py runserver 0.0.0.0:8000
+	python src/manage.py runserver 0.0.0.0:8000
 
 run-worker:
-	celery -A scout_web worker -l info
+	PYTHONPATH=src celery -A scout_web worker -l info
 
 lint:
 	flake8 .
@@ -19,6 +19,6 @@ security-check:
 	bandit -r .
 
 check:
-	python manage.py check
+	python src/manage.py check
 
 all-checks: test lint security-check check
