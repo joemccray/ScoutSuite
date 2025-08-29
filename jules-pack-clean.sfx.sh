@@ -6,13 +6,23 @@ mkdir -p "$TARGET"
 
 write_file() {
   local dest="$1"; local b64="$2"
-  python3 - "$dest" "$b64" <<'PYEOF' || python - "$dest" "$b64" <<'PYEOF'
+  if command -v python3 >/dev/null 2>&1; then
+    python3 - "$dest" "$b64" <<'PYEOF'
 import sys,base64,os
 dest, data = sys.argv[1], sys.argv[2]
 os.makedirs(os.path.dirname(dest), exist_ok=True) if os.path.dirname(dest) else None
 with open(dest,'wb') as f: f.write(base64.b64decode(data))
 print("[SFX] wrote", dest)
 PYEOF
+  else
+    python - "$dest" "$b64" <<'PYEOF'
+import sys,base64,os
+dest, data = sys.argv[1], sys.argv[2]
+os.makedirs(os.path.dirname(dest), exist_ok=True) if os.path.dirname(dest) else None
+with open(dest,'wb') as f: f.write(base64.b64decode(data))
+print("[SFX] wrote", dest)
+PYEOF
+  fi
 }
 write_file "$TARGET/.github/workflows/verify-docs.yml" "bmFtZTogdmVyaWZ5LWRvY3MKb246IFtwdXNoLCBwdWxsX3JlcXVlc3RdCmpvYnM6CiAgdmVyaWZ5OgogICAgcnVucy1vbjogdWJ1bnR1LWxhdGVzdAogICAgc3RlcHM6CiAgICAgIC0gdXNlczogYWN0aW9ucy9jaGVja291dEB2NAogICAgICAtIG5hbWU6IEp1bGVzIHByZWZsaWdodAogICAgICAgIHJ1bjogYmFzaCBzY3JpcHRzL2p1bGVzX3ByZWFtYmxlLnNoCiAgICAgIC0gbmFtZTogVmVyaWZ5IG1hbmlmZXN0CiAgICAgICAgcnVuOiBweXRob24gc2NyaXB0cy92ZXJpZnlfbWFuaWZlc3QucHkgLS1jaGVjawo="
 write_file "$TARGET/README.md" "IyBKdWxlcyBKdXN0LVdvcmtzIFBhY2sKCi0gRXh0cmFjdCB0aGlzIGludG8geW91ciByZXBvIHJvb3Q6CiAgYGBgYmFzaAogIGJhc2gganVsZXMtcGFjay1jbGVhbi5zZnguc2ggLgogIGBgYAotIEF0IHRoZSB0b3Agb2YgRVZFUlkgSnVsZXMgdGFzaywgcGFzdGU6CiAgYGBgYmFzaAogIGJhc2ggc2NyaXB0cy9qdWxlc19wcmVhbWJsZS5zaAogIGBgYAo="

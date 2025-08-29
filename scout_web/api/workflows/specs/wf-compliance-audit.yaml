@@ -1,0 +1,32 @@
+id: "wf-compliance-audit"
+name: "Compliance Audit"
+icp: "compliance_officer"
+goal: "To audit the cloud environment against a compliance standard."
+kpis:
+  time_on_task_minutes:
+    target_reduction_pct: 50
+steps:
+  - id: "step-1"
+    agent: "compliance_auditing"
+    qa_agent: "qa_compliance_auditing"
+    input:
+      task: "Audit the environment against the CIS AWS Foundations Benchmark."
+    acceptance:
+      - "The audit is accurate and complete."
+      - "The report is suitable for submission to auditors."
+  - id: "step-2"
+    agent: "compliance_auditing"
+    qa_agent: "qa_compliance_auditing"
+    input:
+      task: "Audit the environment against the PCI-DSS standard."
+    acceptance:
+      - "The audit is accurate and complete."
+      - "The report is suitable for submission to auditors."
+  - id: "step-3"
+    agent: "compliance_auditing"
+    qa_agent: "qa_compliance_auditing"
+    input:
+      task: "Audit the environment against the HIPAA standard."
+    acceptance:
+      - "The audit is accurate and complete."
+      - "The report is suitable for submission to auditors."
