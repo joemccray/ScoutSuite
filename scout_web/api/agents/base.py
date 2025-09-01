@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.conf import settings
 
 from crewai import Agent as CrewAgent, Task as CrewTask, Crew, Process
-from crewai.tools import tool
+from crewai_tools import tool
 
 @tool("echo")
 def echo_tool(q: str) -> str:

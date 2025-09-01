@@ -1,7 +1,8 @@
 import asyncio
 import inspect
+import logging
 import re
-from hashlib import sha1
+from hashlib import sha256
 
 from ScoutSuite.core.console import print_info, print_warning
 from ScoutSuite.providers.aws.utils import is_throttled as aws_is_throttled
@@ -16,7 +17,7 @@ def get_non_provider_id(name):
     :param name:                    Name of the resource to
     :return:                        SHA1(name)
     """
-    name_hash = sha1()
+    name_hash = sha256()
     name_hash.update(name.encode('utf-8'))
     return f'scoutid-{name_hash.hexdigest()}'
 
@@ -107,8 +108,8 @@ async def map_concurrently(coroutine, entities, **kwargs):
     for task in asyncio.as_completed(tasks):
         try:
             result = await task
-        except Exception:
-            pass
+        except Exception as e:
+            logging.warning(e)
         else:
             results.append(result)
 
