@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
+    "scout_web.api.apps.ApiConfig",
     "scout_web.api.drf",
     "scout_web.api.agents",
     "scout_web.api.workflows",

@@ -36,7 +36,7 @@ class AzureCredentials:
             try:
                 access_token = self.identity_credentials.get_token("https://management.core.windows.net/.default")
                 h = {'Authorization': f'Bearer {access_token.token}'}
-                r = requests.get('https://management.azure.com/tenants?api-version=2020-01-01', headers=h)
+                r = requests.get('https://management.azure.com/tenants?api-version=2020-01-01', headers=h, timeout=60)
                 r2 = r.json()
                 return r2.get('value')[0].get('tenantId')
             except Exception as e:

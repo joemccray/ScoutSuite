@@ -1,6 +1,6 @@
 import datetime
 from .models import Scan, Finding
-from ScoutSuite.api import run_from_api
+from ScoutSuite.api import run as run_from_api
 
 class ScanService:
     @staticmethod

@@ -2,7 +2,7 @@
 addopts = -q -ra --maxfail=1 --disable-warnings
 testpaths = tests **/tests scans
 pythonpath = .
-DJANGO_SETTINGS_MODULE = config.settings_test
+DJANGO_SETTINGS_MODULE = ScoutSuite.providers.azure.resources.securitycenter.settings
 markers =
     django_db: marks tests as using the Django DB
     aws: marks tests that stub AWS calls
